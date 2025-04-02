@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const morgan = require("morgan");
 const cors = require("cors");
-// const methodOverride = require('method-override');
+// cons methodOverride = require('method-override');
 
 const config = require("./config/config");
 const upload = require("express-fileupload");
