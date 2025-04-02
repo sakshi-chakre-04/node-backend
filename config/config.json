@@ -1,0 +1,7 @@
+{
+    "secret": "regform",
+    "refreshTokenSecret": "This is another secret",
+    "tokenLife": "24h",
+    "refreshTokenLife": "24h",
+    "hostname": "127.0.0.1:"
+}

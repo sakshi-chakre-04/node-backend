@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Details</title>
+    <style>
+        body {
+            background: url("https://plus.unsplash.com/premium_photo-1701769905519-b9fa8bb4b649?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 800px;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #4A90E2;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .sidebar img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .form-container {
+            flex: 1;
+            padding: 30px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img
+            src="https://www.nfsu.ac.in/faculty/img/1.jpg"
+            alt="User Profile"
+          />
+            
+            <h3>Update User Info</h3>
+        </div>
+        <div class="form-container">
+            <h2>Update User Details</h2>
+            <form id="updateForm">
+                <label for="name">Name:</label>
+                <input type="text" id="Name" name="Name" value="<%= user.Name %>" required>
+                
+                <label for="age">Age:</label>
+                <input type="number" id="Age" name="Age" value="<%= user.Age %>" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="Message" name="Message"><%= user.Message %></textarea>
+                
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="male" <%= user.gender === 'male' ? 'selected' : '' %>>Male</option>
+                    <option value="female" <%= user.gender === 'female' ? 'selected' : '' %>>Female</option>
+                    <option value="other" <%= user.gender === 'other' ? 'selected' : '' %>>Other</option>
+                </select>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= user.email %>" required>
+                
+                <label for="contact">Contact:</label>
+                <input type="text" id="contact" name="contact" value="<%= user.contact %>" required>
+                
+                <label for="Status">Status:</label>
+                <select id="Status" name="Status">
+                    <option value="active" <%= user.Status === 'active' ? 'selected' : '' %>>Active</option>
+                    <option value="inactive" <%= user.Status === 'inactive' ? 'selected' : '' %>>Inactive</option>
+                </select>
+                
+                <button type="button" onclick="submitUpdate()">Update</button>
+            </form>
+
+            <script>
+                function submitUpdate() {
+                    const formData = {
+                        Name: document.getElementById('Name').value,
+                        Age: document.getElementById('Age').value,
+                        Message: document.getElementById('Message').value,
+                        gender: document.getElementById('gender').value,
+                        email: document.getElementById('email').value,
+                        contact: document.getElementById('contact').value,
+                        Status: document.getElementById('Status').value
+                    };
+                    
+                    console.log('Submitting update...');
+                    fetch(`/api/user/updateUserDetails/<%= user._id %>`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData),
+                        redirect: 'manual' // Prevent automatic redirect
+                    })
+                    .then(response => {
+                        if (response.status === 302) {
+                            // Handle redirect manually with GET
+                            window.location.href = `/api/user/userDetails`;
+                        } else if (response.ok) {
+                            console.log('Update successful, redirecting...');
+                            window.location.href = `/api/user/userDetails`;
+                        } else {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                    })
+ 
+
+
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Update failed: ' + error.message);
+                    });
+
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
