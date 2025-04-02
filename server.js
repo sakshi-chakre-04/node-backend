@@ -60,3 +60,9 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 module.exports = app;
+console.log("Available Routes:");
+app._router.stack.forEach(layer => {
+  if (layer.route) {
+    console.log(layer.route.path);
+  }
+});
