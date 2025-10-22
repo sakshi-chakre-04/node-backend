@@ -12,7 +12,6 @@ This project is a **User Management CRUD API** built with Node.js, Express, and 
 - **Pagination**: Support for paginated user lists to enhance performance and usability.
 - **Frontend Integration**: EJS-based views for user forms and details.
 - **RESTful API**: Structured endpoints for integration with other services.
-- **CORS Support**: Configured for cross-origin requests.
 - **MongoDB Atlas Integration**: Connects to a remote MongoDB database.
 
 ## Tech Stack
@@ -20,7 +19,6 @@ This project is a **User Management CRUD API** built with Node.js, Express, and 
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Mongoose ODM)
 - **View Engine**: EJS
-- **Middleware**: body-parser, cors, morgan, express-fileupload
 
 ## Getting Started
 
@@ -118,3 +116,4 @@ This project is a User Management CRUD API designed to handle user data efficien
 **Author:** [sakshi-chakre-04](https://github.com/sakshi-chakre-04)
 
 Feel free to contribute or raise issues!
+
